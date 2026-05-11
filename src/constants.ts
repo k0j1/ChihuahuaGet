@@ -7,7 +7,7 @@ export const ITEM_INTERVAL_MS = 300; // 出現間隔 0.3秒
 export const MAX_STAMINA = 10;
 export const STAMINA_RECOVERY_MS = 60 * 60 * 1000; // 1時間に1回復
 
-export const GAME_VERSION = 'v1.0.2';
+export const GAME_VERSION = 'v1.0.3';
 
 export const ITEMS: GameItem[] = [
   { id: 'biscuit', name: 'ドッグビスケット', type: 'food', weight: 50, score: 10, icon: '🍪' },
