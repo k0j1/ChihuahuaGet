@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #f59e0b; /* Amber-500 */
+  --color-primary-hover: #d97706; /* Amber-600 */
+  --color-secondary: #8b5a2b; /* Brown */
+  
+  --color-bg-main: #fffbeb; /* Amber-50 */
+  --color-bg-card: #ffffff;
+  
+  --color-text-main: #451a03; /* Amber-900 */
+  --color-text-muted: #78350f; /* Amber-800 */
+  
+  --font-sans: "Inter", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
+  
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-full: 9999px;
+  
+  --shadow-card: 0 10px 15px -3px rgba(139, 90, 43, 0.1), 0 4px 6px -2px rgba(139, 90, 43, 0.05);
+  --shadow-button: 0 4px 6px -1px rgba(245, 158, 11, 0.2), 0 2px 4px -1px rgba(245, 158, 11, 0.1);
+}
+
+body {
+  background-color: var(--color-bg-main);
+  color: var(--color-text-main);
+  font-family: var(--font-sans);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
