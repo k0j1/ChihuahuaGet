@@ -81,22 +81,8 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({ stamina, nextRecoveryT
           initial={{ scale: 0.1, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.3, type: "spring", stiffness: 200, damping: 15 }}
-          className="relative flex items-center justify-center my-0 z-20 flex-[0.8] min-h-0"
+          className="relative flex items-end justify-center my-0 z-20 flex-[0.8] min-h-0 pb-4"
         >
-          {/* Light rays background */}
-          <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none -mt-4">
-            <div className="w-[200px] h-[200px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/60 via-white/0 to-transparent rounded-full" />
-            <div className="absolute w-[200px] h-[200px] animate-spin-slow opacity-50">
-              {[...Array(8)].map((_, i) => (
-                <div 
-                  key={i} 
-                  className="absolute top-1/2 left-1/2 w-full h-[20px] bg-white/40 transform -translate-x-1/2 -translate-y-1/2"
-                  style={{ transform: `translate(-50%, -50%) rotate(${i * 22.5}deg)` }}
-                />
-              ))}
-            </div>
-          </div>
-          
           {/* Character */}
           <div className="w-[220px] h-[220px] sm:w-[260px] sm:h-[260px] relative z-10 drop-shadow-xl transform origin-bottom hover:scale-105 transition-transform">
             <img 
@@ -114,13 +100,20 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({ stamina, nextRecoveryT
           transition={{ delay: 0.5, duration: 0.5 }}
           className="w-full px-8 mb-2 z-30"
         >
-          <button
-            onClick={onStart}
-            disabled={!canPlay}
-            className={`pink-button w-full ${!canPlay ? 'opacity-50 grayscale cursor-not-allowed pointer-events-none' : ''}`}
-          >
-            <span>🐾 プレイ開始 🐾</span>
-          </button>
+          <div className="relative w-full">
+            {/* Glowing Animation */}
+            {canPlay && (
+              <div className="absolute -inset-1 bg-white rounded-[2rem] blur-md animate-pulse opacity-80" />
+            )}
+            
+            <button
+              onClick={onStart}
+              disabled={!canPlay}
+              className={`pink-button w-full relative z-10 ${!canPlay ? 'opacity-50 grayscale cursor-not-allowed pointer-events-none' : ''}`}
+            >
+              <span>🐾 プレイ開始 🐾</span>
+            </button>
+          </div>
         </motion.div>
       </div>
 

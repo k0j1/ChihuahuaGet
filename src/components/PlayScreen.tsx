@@ -45,7 +45,7 @@ export const PlayScreen: React.FC<PlayScreenProps> = ({
   };
 
   return (
-    <div className="relative w-full h-full overflow-hidden flex flex-col bg-[#e0f7fb]">
+    <div className="relative w-full h-full overflow-hidden flex flex-col">
       {/* HUD Header */}
       <div className="flex justify-between items-center px-4 pt-6 pb-2 gap-2 z-20">
         <div className="bg-white border-4 border-[#ffdf4d] rounded-2xl px-4 py-2 flex flex-col items-center shadow-md">
@@ -72,11 +72,11 @@ export const PlayScreen: React.FC<PlayScreenProps> = ({
       {/* Play Area */}
       <div className="flex-1 relative w-full overflow-hidden">
         {/* Background Dog */}
-        <div className="absolute bottom-[-20px] left-1/2 -translate-x-1/2 z-10 w-[240px] pointer-events-none">
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-10 w-[220px] pointer-events-none">
           <img 
             src="https://getfood-chihuahua.k0j1.v2002.coreserver.jp/images/Chihuahua_Back01.png" 
             alt="Chihuahua" 
-            className="w-full h-auto object-contain"
+            className="w-full h-auto object-contain drop-shadow-xl"
           />
         </div>
 
