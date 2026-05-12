@@ -1,5 +1,5 @@
 import React from 'react';
-import { Zap } from 'lucide-react';
+import { Clock } from 'lucide-react';
 import { MAX_STAMINA } from '../constants';
 
 interface StaminaDisplayProps {
@@ -36,16 +36,26 @@ export const StaminaDisplay: React.FC<StaminaDisplayProps> = ({ stamina, nextRec
   }, [nextRecoveryTime, stamina]);
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-card text-text-main font-bold">
-        <Zap className={`w-5 h-5 ${stamina > 0 ? 'text-primary fill-primary' : 'text-gray-400'}`} />
-        <span className="text-xl">
-          {stamina} <span className="text-sm text-text-muted">/ {MAX_STAMINA}</span>
-        </span>
+    <div className="bg-[#fff9e6] border-2 border-orange-200 rounded-2xl p-2 shadow-sm flex flex-col min-w-[160px]">
+      <div className="text-[10px] font-bold text-text-brown mb-1 leading-none text-left pl-1">
+        スタミナ
+      </div>
+      <div className="flex items-center justify-between">
+        <div className="flex gap-0.5">
+          {[...Array(MAX_STAMINA)].map((_, i) => (
+            <div key={i} className={`text-sm ${i < stamina ? 'text-primary' : 'text-orange-200 opacity-50'}`}>
+              ❤️
+            </div>
+          ))}
+        </div>
+        <div className="text-primary font-bold text-sm ml-2 font-pop">
+          {stamina}/{MAX_STAMINA}
+        </div>
       </div>
       {stamina < MAX_STAMINA && (
-        <div className="text-xs text-text-muted mt-1 font-mono">
-          次の回復まで {timeStr}
+        <div className="flex items-center gap-1 mt-1 text-[10px] font-bold text-text-brown">
+          <Clock size={10} className="stroke-[3px]" />
+          <span>{timeStr}で1回復</span>
         </div>
       )}
     </div>

@@ -1,32 +1,73 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #f59e0b; /* Amber-500 */
-  --color-primary-hover: #d97706; /* Amber-600 */
-  --color-secondary: #8b5a2b; /* Brown */
+  --color-primary: #ff8fb0; /* Pink for primary button */
+  --color-primary-hover: #ff7aa3; /* Darker Pink */
+  --color-primary-shadow: #e54d7e; /* Shadow Pink */
   
-  --color-bg-main: #fffbeb; /* Amber-50 */
-  --color-bg-card: #ffffff;
+  --color-secondary: #ffad33; /* Orange for Get */
+  --color-tertiary: #95cc29; /* Green for Food */
   
-  --color-text-main: #451a03; /* Amber-900 */
-  --color-text-muted: #78350f; /* Amber-800 */
+  --color-btn-yellow: #ffdf4d;
+  --color-btn-yellow-shadow: #dcb31c;
+  --color-btn-purple: #c596ff;
+  --color-btn-purple-shadow: #995cde;
+  --color-btn-blue: #7dc4ff;
+  --color-btn-blue-shadow: #4d9de0;
   
-  --font-sans: "Inter", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
+  --color-bg-sky: #87cefc;
+  --color-bg-grass: #9fe262;
   
-  --radius-sm: 0.5rem;
-  --radius-md: 1rem;
-  --radius-lg: 1.5rem;
+  --color-text-brown: #663d23;
+  --color-text-main: #663d23;
+  --color-text-muted: #966b4f;
+  
+  --font-sans: "Inter", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", "M PLUS Rounded 1c", sans-serif;
+  --font-pop: "Arial Rounded MT Bold", "VAGRounded BT", "M PLUS Rounded 1c", sans-serif;
+  
+  --radius-sm: 0.75rem;
+  --radius-md: 1.25rem;
+  --radius-lg: 2rem;
   --radius-full: 9999px;
   
-  --shadow-card: 0 10px 15px -3px rgba(139, 90, 43, 0.1), 0 4px 6px -2px rgba(139, 90, 43, 0.05);
-  --shadow-button: 0 4px 6px -1px rgba(245, 158, 11, 0.2), 0 2px 4px -1px rgba(245, 158, 11, 0.1);
+  --shadow-card: 0 4px 0 rgba(0, 0, 0, 0.05);
+  --shadow-button-pink: 0 6px 0 var(--color-primary-shadow), 0 8px 10px rgba(0,0,0,0.1);
+  --shadow-button-sm: 0 4px 0 rgba(0, 0, 0, 0.15);
 }
 
 body {
-  background-color: var(--color-bg-main);
+  background-color: var(--color-bg-sky);
   color: var(--color-text-main);
   font-family: var(--font-sans);
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
+}
+
+/* Custom Utilities for Text Outline */
+.text-outline-white {
+  text-shadow: 
+    -2px -2px 0 #fff,  
+     2px -2px 0 #fff,
+    -2px  2px 0 #fff,
+     2px  2px 0 #fff,
+     0px  4px 0 rgba(102, 61, 35, 0.3); /* Brown drop shadow */
+}
+
+.text-outline-brown {
+  text-shadow: 
+    -1px -1px 0 var(--color-text-brown),  
+     1px -1px 0 var(--color-text-brown),
+    -1px  1px 0 var(--color-text-brown),
+     1px  1px 0 var(--color-text-brown),
+     0px  3px 0 rgba(0,0,0,0.2);
+}
+
+/* Light ray rotation */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
 }
