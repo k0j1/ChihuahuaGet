@@ -1,8 +1,8 @@
 import React from 'react';
-import { HelpCircle, Trophy, Settings } from 'lucide-react';
 import { StaminaDisplay } from './StaminaDisplay';
 import { GAME_VERSION } from '../constants';
 import { motion } from 'motion/react';
+import { useFarcaster } from '../hooks/useFarcaster';
 
 interface TitleScreenProps {
   stamina: number;
@@ -13,6 +13,7 @@ interface TitleScreenProps {
 
 export const TitleScreen: React.FC<TitleScreenProps> = ({ stamina, nextRecoveryTime, balance, onStart }) => {
   const canPlay = stamina > 0;
+  const { user } = useFarcaster();
 
   return (
     <div className="flex flex-col h-full w-full justify-between pb-4">
@@ -20,16 +21,24 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({ stamina, nextRecoveryT
       <div className="flex justify-between items-start px-4 pt-4 shrink-0 relative">
         <StaminaDisplay stamina={stamina} nextRecoveryTime={nextRecoveryTime} />
         
-        {/* Balance Display */}
-        <div className="bg-[#fff9e6] border-2 border-orange-200 rounded-full px-4 py-1.5 flex items-center gap-2 shadow-sm min-w-[120px] justify-between z-10">
-          <div className="flex justify-center items-center bg-yellow-400 rounded-full w-8 h-8 border-2 border-yellow-200 shadow-inner">
-            <span className="text-white font-black text-sm">C</span>
-          </div>
-          <div className="flex flex-col items-end leading-none">
-            <span className="text-[10px] font-bold text-text-brown">CHH残高</span>
-            <span className="text-lg font-black text-text-brown font-pop tracking-tight">
-              {balance.toLocaleString()}
-            </span>
+        {/* Right side: Farcaster Profile & Balance Display */}
+        <div className="flex flex-col items-end gap-2 z-10">
+          {user?.pfpUrl && (
+            <div className="flex items-center gap-2 bg-white/80 backdrop-blur rounded-full px-2 py-1 shadow-sm border-2 border-white">
+              <img src={user.pfpUrl} alt={user.displayName || 'User'} className="w-6 h-6 rounded-full" />
+              <span className="text-xs font-bold text-text-main pr-1">{user.displayName}</span>
+            </div>
+          )}
+          <div className="bg-[#fff9e6] border-2 border-orange-200 rounded-full px-4 py-1.5 flex items-center gap-2 shadow-sm min-w-[120px] justify-between">
+            <div className="flex justify-center items-center bg-yellow-400 rounded-full w-8 h-8 border-2 border-yellow-200 shadow-inner">
+              <span className="text-white font-black text-sm">C</span>
+            </div>
+            <div className="flex flex-col items-end leading-none">
+              <span className="text-[10px] font-bold text-text-brown">CHH残高</span>
+              <span className="text-lg font-black text-text-brown font-pop tracking-tight">
+                {balance.toLocaleString()}
+              </span>
+            </div>
           </div>
         </div>
         
@@ -40,13 +49,13 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({ stamina, nextRecoveryT
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col items-center justify-center relative">
+      <div className="flex-1 flex flex-col items-center justify-between relative w-full pt-4 pb-2">
         {/* Title Logo */}
         <motion.div
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, type: 'spring' }}
-          className="relative z-10 flex flex-col items-center top-[-20px]"
+          className="relative z-10 flex flex-col items-center mt-2 shrink-0"
         >
           {/* Sparkles */}
           <div className="absolute top-0 right-[-20px] text-yellow-300 text-3xl animate-pulse">✨</div>
@@ -67,21 +76,21 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({ stamina, nextRecoveryT
           </div>
         </motion.div>
 
-        {/* Character with light rays */}
+        {/* Character with light rays - reduced space */}
         <motion.div 
           initial={{ scale: 0.1, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.3, type: "spring", stiffness: 200, damping: 15 }}
-          className="relative flex items-center justify-center mt-4 z-20"
+          className="relative flex items-center justify-center my-0 z-20 flex-[0.8] min-h-0"
         >
           {/* Light rays background */}
-          <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
-            <div className="w-[400px] h-[400px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/60 via-white/0 to-transparent rounded-full" />
-            <div className="absolute w-[300px] h-[300px] animate-spin-slow opacity-50">
+          <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none -mt-4">
+            <div className="w-[200px] h-[200px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/60 via-white/0 to-transparent rounded-full" />
+            <div className="absolute w-[200px] h-[200px] animate-spin-slow opacity-50">
               {[...Array(8)].map((_, i) => (
                 <div 
                   key={i} 
-                  className="absolute top-1/2 left-1/2 w-full h-[30px] bg-white/40 transform -translate-x-1/2 -translate-y-1/2"
+                  className="absolute top-1/2 left-1/2 w-full h-[20px] bg-white/40 transform -translate-x-1/2 -translate-y-1/2"
                   style={{ transform: `translate(-50%, -50%) rotate(${i * 22.5}deg)` }}
                 />
               ))}
@@ -89,8 +98,12 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({ stamina, nextRecoveryT
           </div>
           
           {/* Character */}
-          <div className="text-[120px] relative z-10 drop-shadow-xl transform origin-bottom hover:scale-105 transition-transform">
-            🐶
+          <div className="w-[220px] h-[220px] sm:w-[260px] sm:h-[260px] relative z-10 drop-shadow-xl transform origin-bottom hover:scale-105 transition-transform">
+            <img 
+              src="https://getfood-chihuahua.k0j1.v2002.coreserver.jp/images/Chihuahua.png" 
+              alt="Chihuahua" 
+              className="w-full h-full object-contain"
+            />
           </div>
         </motion.div>
 
@@ -99,46 +112,19 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({ stamina, nextRecoveryT
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.5 }}
-          className="w-full px-8 mt-2 z-30"
+          className="w-full px-8 mb-2 z-30"
         >
           <button
             onClick={onStart}
             disabled={!canPlay}
-            className={`
-              w-full flex items-center justify-center gap-2 py-4 rounded-full text-3xl font-pop font-black border-4 border-white transition-transform
-              ${canPlay 
-                ? 'bg-primary text-white shadow-button-pink active:translate-y-2 active:shadow-button-sm' 
-                : 'bg-gray-400 text-gray-200 border-gray-300 shadow-none cursor-not-allowed'}
-            `}
-            style={canPlay ? { textShadow: '0 2px 4px rgba(0,0,0,0.2)' } : undefined}
+            className={`pink-button w-full ${!canPlay ? 'opacity-50 grayscale cursor-not-allowed pointer-events-none' : ''}`}
           >
-            🐾 プレイ開始 🐾
+            <span>🐾 プレイ開始 🐾</span>
           </button>
         </motion.div>
       </div>
 
-      {/* Bottom Menu */}
-      <motion.div 
-        initial={{ y: 50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.6 }}
-        className="w-full px-6 flex justify-center gap-4 mt-6 mb-4 z-20"
-      >
-        <button className="flex flex-col items-center justify-center w-20 h-20 bg-btn-yellow rounded-2xl border-2 border-white text-text-brown shadow-[0_4px_0_var(--color-btn-yellow-shadow)] active:translate-y-1 active:shadow-[0_2px_0_var(--color-btn-yellow-shadow)] transition-all">
-          <HelpCircle size={32} strokeWidth={2.5} className="mb-1" />
-          <span className="text-sm font-bold">ヘルプ</span>
-        </button>
-        
-        <button className="flex flex-col items-center justify-center w-20 h-20 bg-btn-purple rounded-2xl border-2 border-white text-white shadow-[0_4px_0_var(--color-btn-purple-shadow)] active:translate-y-1 active:shadow-[0_2px_0_var(--color-btn-purple-shadow)] transition-all">
-          <Trophy size={32} strokeWidth={2.5} className="mb-1 text-yellow-300 drop-shadow-md" />
-          <span className="text-sm font-bold">ランキング</span>
-        </button>
-        
-        <button className="flex flex-col items-center justify-center w-20 h-20 bg-btn-blue rounded-2xl border-2 border-white text-white shadow-[0_4px_0_var(--color-btn-blue-shadow)] active:translate-y-1 active:shadow-[0_2px_0_var(--color-btn-blue-shadow)] transition-all">
-          <Settings size={32} strokeWidth={2.5} className="mb-1" />
-          <span className="text-sm font-bold">設定</span>
-        </button>
-      </motion.div>
+
 
       {/* Footer message */}
       <motion.div 

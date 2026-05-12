@@ -71,3 +71,53 @@ body {
 .animate-spin-slow {
   animation: spin-slow 20s linear infinite;
 }
+
+.pink-button {
+  /* サイズと形状 */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 60px;
+  border-radius: 100px; /* 丸みのある形状 */
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  
+  /* ボタン本体のグラデーションと枠線 */
+  background: linear-gradient(to bottom, #ff8da1 0%, #ff5d7d 100%);
+  border: 4px solid #cc4a64; /* 濃いピンクの枠線 */
+  
+  /* テキストのスタイル */
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: "Yu Gothic", "Meiryo", sans-serif;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+  letter-spacing: 2px;
+}
+
+/* 左上の白いツヤ（ハイライト） */
+.pink-button::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 15px;
+  width: 25px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  transform: rotate(-15deg);
+}
+
+/* ホバー時の挙動 */
+.pink-button:hover {
+  filter: brightness(1.05);
+  transform: scale(1.02);
+  transition: 0.2s;
+}
+
+/* クリック時の挙動 */
+.pink-button:active {
+  transform: scale(0.98);
+}

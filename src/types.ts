@@ -1,4 +1,4 @@
-export type ScreenType = 'title' | 'play' | 'result';
+export type ScreenType = 'title' | 'play' | 'result' | 'apps' | 'paper';
 
 export type ItemType = 'food' | 'trash';
 
